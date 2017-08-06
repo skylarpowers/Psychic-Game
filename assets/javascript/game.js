@@ -1,40 +1,44 @@
-//array for possible choices
-var letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+//letter choices available
+var letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
-//guessed letters array
-var guessedLetters= [];
 
-//correct letter to guess
-var letterToGuess = undefined;
 
-//number of guesses left
+var guesses = 9;
+
 var guessesLeft = 9;
+
+var guessedLetters = [];
+
+var letterToGuess = null;
 
 //wins/losses counter
 var wins = 0;
 var losses = 0;
+//computer letter generator
+var computerGuess = letters[Math.floor(Math.random() * letters.length)];
 
-
-//function to show guesses left
+//updating guesses left
 var updateGuessesLeft = function() {
-  document.querySelector("#guessesLeftToWin").innerHTML = "Number of guesses left: " + guessesLeft;
+  document.querySelector('#guessesLeftToWin').innerHTML = "Guesses left: " + guessesLeft;
 };
 
-//function to get new letter to guess
+//updating letter to guess
 var updateLetterToGuess = function() {
   this.letterToGuess = this.letters[Math.floor(Math.random() * this.letters.length)];
 };
 
-//function to show guessed letters
-var updateGuessedLetters = function() {
-  document.querySelector("#userGuesses").innerHTML = "Your Guesses so far: " + guessedLetters.join(', ');
+//updating letters guessed
+var updateGuessesSoFar = function() {
+  document.querySelector('#userGuesses').innerHTML = "Your Guesses so far: " + guessedLetters.join(', ');
 };
 
-//reset function
+
+// reset function
 var reset = function() {
   totalGuesses = 9;
   guessesLeft = 9;
   guessedLetters = [];
+
   updateLetterToGuess();
   updateGuessesLeft();
   updateGuessesSoFar();
@@ -44,7 +48,7 @@ updateLetterToGuess();
 updateGuessesLeft();
 
 
-
+//when key is released starts it
 document.onkeyup = function(event) {
     guessesLeft--;
   var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
@@ -53,23 +57,23 @@ document.onkeyup = function(event) {
   updateGuessesLeft();
   updateGuessesSoFar();
 
-  		//if you win this happens
+        //if you win this happens
         if (guessesLeft > 0){
             if (userGuess == letterToGuess){
                 wins++;
-                document.querySelector('#wins').innerHTML("Wins: " + wins);
-                alert("You Win! Continue With Your Streak!!");
+                document.querySelector('#wins').innerHTML = "Wins: " + wins;
+                alert("Yes, you are psychic!");
+                //reset game after win
                 reset();
             }
-           //if incorrect this happens
+
+        //if you lose this happens   
         }else if(guessesLeft == 0){
             // Then we will loss and we'll update the html to display the loss 
             losses++;
-            document.querySelector('#losses').innerHTML("Losses: " + losses);
-            alert("You Lose! Try Again!!");
-            // Then we'll call the reset. 
+            document.querySelector('#losses').innerHTML = "Losses: " + losses;
+            alert("Sorry, you're not psychic, maybe try again?");
+            // reset game after loss
             reset();
         }
 };
-
-
