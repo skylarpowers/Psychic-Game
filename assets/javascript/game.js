@@ -62,7 +62,7 @@ document.onkeyup = function(event) {
             if (userGuess == letterToGuess){
                 wins++;
                 document.querySelector('#wins').innerHTML = "Wins: " + wins;
-                alert("Yes, you are psychic!");
+                alert("You Win! Play Again!");
                 //reset game after win
                 reset();
             }
@@ -72,7 +72,7 @@ document.onkeyup = function(event) {
             // Then we will loss and we'll update the html to display the loss 
             losses++;
             document.querySelector('#losses').innerHTML = "Losses: " + losses;
-            alert("Sorry, you're not psychic, maybe try again?");
+            alert("You Lose! Try Again!");
             // reset game after loss
             reset();
         }
